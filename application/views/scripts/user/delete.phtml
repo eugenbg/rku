@@ -1,0 +1,9 @@
+<div id="view-content">
+        <ul>
+	<?foreach ($this->users as $key => $value): ?>
+            <li class="delete">
+                Логин: <?=$value['username']?>, Id: <?=$value['data_client']?> - <a href="<?=$this->baseUrl().'/user/delete/id/'.$value['user_id'] ?>">Удалить из базы</a>
+            </li>
+        <?endforeach;?>
+        </ul>
+</div>

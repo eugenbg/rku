@@ -1,0 +1,40 @@
+<h1>Отчет ООО "РКУ", за месяц <?=$this->date; ?></h1>
+<div id="view-content">
+        <?=$this->message; ?>
+	<?=$this->form; ?>
+Всего распространено: <?=$this->sumAll; ?> <br>
+
+<? $pointer = 0;
+$end = false;
+?>
+<? while ($end == false): ?>
+<table>
+    <tr>
+        <td width="25%">
+            <?
+            for ($i=0; $i <= $this->n; $i++): ?>
+                <p><? echo $this->out[$pointer]; $pointer++; ?></p>
+            <? endfor;?>
+        </td>
+        <td width="25%">
+            <? for ($i=0; $i <= $this->n; $i++): ?>
+                <p><? echo $this->out[$pointer]; $pointer++; ?></p>
+            <?endfor;?>
+        </td>
+        <td width="25%">
+            <? for ($i=0; $i <= $this->n; $i++): ?>
+                <p><? echo $this->out[$pointer]; $pointer++; ?></p>
+            <?endfor;?>
+        </td>
+        <td width="25%">
+            <? for ($i=0; $i <= $this->n; $i++): ?>
+                <p><? echo $this->out[$pointer]; $pointer++; ?></p>
+            <?endfor;
+            if (!isset($this->out[$pointer]))
+                $end = true;
+            ?>
+        </td>
+    </tr>
+</table><p></p><p></p>
+<? endwhile; ?>
+</div>

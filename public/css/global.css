@@ -1,0 +1,30 @@
+/*
+    Document   : global
+    Created on : 03.12.2013, 14:38:29
+    Author     : bg
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#header {
+    margin-bottom: 20px;
+}
+
+a {
+    color: blue;
+}
+
+a:visited {
+    color: blue;
+}
+
+td {
+    vertical-align:top;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse:collapse;
+}
