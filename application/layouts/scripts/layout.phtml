@@ -3,13 +3,14 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>ООО "РКУ" - система отчетности</title>
-  <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+  <?php echo $this->headLink()->appendStylesheet('/css/global.css', '') ?>
 </head>
 <body>
-<div id="header" style="background-color: #EEEEEE; height: 30px; padding: 5px">
+<div id="header" class="clear" style="background-color: #EEEEEE; padding: 5px">
     Система для просмотра отчетов rku-client
-</div>
+
 <?php echo $this->navigation()->menu()->renderMenu($this->layout()->menu) ?>
+</div>
 <?php echo $this->layout()->content ?>
 
 </body>

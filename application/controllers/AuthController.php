@@ -43,10 +43,10 @@ class AuthController extends Zend_Controller_Action
                     $authStorage->role = $identity->role;
                     $authStorage->write($authStorage);
 
-                    $this->_redirect('index/index');
+                    $this->_redirect('');
                 }
                 else {
-                    $this->view->errorMessage = 'Error: Login or password is wrong';
+                    $this->view->errorMessage = 'Ошибка: неверный логин или пароль';
                 }
             }
         }
@@ -65,7 +65,7 @@ class AuthController extends Zend_Controller_Action
     public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_redirect('index/index');
+        $this->_redirect('');
     }
 
     private function getAuthAdapter()

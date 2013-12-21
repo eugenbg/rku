@@ -43,6 +43,7 @@
       </layoutsDirectory>
       <modelsDirectory>
         <modelFile modelName="UpdateDb"/>
+        <modelFile modelName="Preparedata"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>

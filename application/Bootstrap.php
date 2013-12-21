@@ -23,7 +23,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     if ($identity->role == 'user') {
                         $menuContainer = new Zend_Navigation(array (
                                         array (
-                                        'label' => 'Отчет',
+                                        'label' => 'Отчет по месяцам',
                                         'controller' => 'report',
                                         'action' => 'index'),
                                         array (
@@ -38,14 +38,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                         'label' => 'Обновить базу данных',
                                         'controller' => 'updatedb',
                                         'action' => 'index'),
-                                        array (
+                                        /*array (
                                         'label' => 'Зарегистрировать нового клиента',
                                         'controller' => 'user',
                                         'action' => 'register'),
                                         array (
                                         'label' => 'Удалить клиента',
                                         'controller' => 'user',
-                                        'action' => 'delete'),
+                                        'action' => 'delete'),*/
                                         array (
                                         'label' => 'Выйти',
                                         'controller' => 'auth',
@@ -56,7 +56,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 {
                     $menuContainer = new Zend_Navigation(array (
                                     array (
-                                    'label' => 'Залогиниться',
+                                    'label' => 'Войти',
                                     'controller' => 'auth',
                                     'action' => 'login')));
                 }

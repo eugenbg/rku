@@ -21,7 +21,7 @@ class Model_UpdateDb  {
                     $row++;
                     $nQuery++;
                     //print_r($data);
-                    if ($nQuery>100) {
+                    if ($nQuery>500) {
                         $query = $startQuery.$endQuery;
                         // get rid of excess ', '
                         $query = substr($query, 0, -2);

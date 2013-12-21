@@ -16,7 +16,7 @@ class Form_LoginForm extends Zend_Form {
                     ->setRequired(true);
 
         $login = new Zend_Form_Element_Submit('login');
-        $login->setLabel('Login');
+        $login->setLabel('Войти');
 
         $this->addElement($username);
         $this->addElement($password);

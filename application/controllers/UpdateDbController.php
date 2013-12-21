@@ -11,10 +11,15 @@ class UpdateDbController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        if (!isset($this->identity)){
+            $this->view->message = "Авторизуйтесь на сайте, используя ваши логин и пароль";
+            return;
+        } else {
+            $this->view->loggedin = true;
+        }
         if($this->_request->isPost()){
             $this->view->message .= $this->clearUploadFolder().'<br>';
-            //usleep(1000000);
-            $file = var_dump($this->unzipUploadedFile());
+            $file = $this->unzipUploadedFile();
             $path = $this->uploadPath.$file[2];
             $model = new Model_UpdateDb();
             $row = $model->update($path);
@@ -94,5 +99,8 @@ class UpdateDbController extends Zend_Controller_Action
         }
         return $file;
     }
+
+
+
 }
 

@@ -10,6 +10,9 @@
     margin-bottom: 20px;
 }
 
+.clear {
+    clear:both;
+}
 a {
     color: blue;
 }
@@ -27,4 +30,53 @@ td {
 table {
     width: 100%;
     border-collapse:collapse;
+    margin: 0 0 50px 0;
+}
+
+p, h2, h3 {
+    margin: 2px;
+}
+
+@media print {
+    table {
+        page-break-after:always;
+        margin: 0;
+    }
+    td {
+    vertical-align:top;
+    border: 1px solid black;
+    padding: 0;
+    }
+    p {
+        margin:0;
+        padding:0;
+    }
+    h1 {
+        font-size: 14px;
+        font-weight: bold;
+        margin:0;
+        padding:0;
+    }
+    h2 {
+        font-size: 13px;
+        font-weight: bold;
+        margin:0;
+        padding:0;
+    }
+    h3 {
+        font-size: 12px;
+        font-weight: bold;
+        margin:0;
+        padding:0;
+    }
+    p{
+        font-size: 10px;
+    }
+    #header {
+        display: none;
+    }
+
+    .noprint {
+        display:none;
+    }
 }

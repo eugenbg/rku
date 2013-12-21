@@ -1,5 +1,7 @@
+<?=$this->message; ?>
+<? if($this->loggedin): ?>
 <div id="view-content">
-    <?=$this->message; ?>
     <?=$this->form; ?>
     <?=$this->result; ?>
 </div>
+<? endif; ?>
