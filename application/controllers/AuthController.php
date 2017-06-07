@@ -16,7 +16,7 @@ class AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         if(Zend_Auth::getInstance()->hasIdentity()){
-            $this->_redirect('index/index');
+            $this->_redirect('/index/index');
         }
 
         $form = new Form_LoginForm();
@@ -65,7 +65,7 @@ class AuthController extends Zend_Controller_Action
     public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_redirect('');
+        $this->_redirect('http://rku.by');
     }
 
     private function getAuthAdapter()

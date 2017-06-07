@@ -26,10 +26,11 @@ class ReportController extends Zend_Controller_Action
                 $product_code = $form->getValue('product_code');
                 $date = $form->getValue('date');
                 $dateOut = $date;
+                $byProductCode = $form->getValue('submit2');
             }
             $identity = Zend_Auth::getInstance()->getIdentity();
             $model = new Model_Preparedata();
-            $result = $model->fetchFromDb($identity, $date, $product_code);
+            $result = $model->fetchFromDb($date, $product_code, $byProductCode);
             $arr = $result->toArray();
             $forWho = $arr[0]['for_who'];
             unset($arr);
@@ -41,7 +42,7 @@ class ReportController extends Zend_Controller_Action
 
             // проверяем, не пустые ли данные
             if (count($result->toArray()) == 0){
-                $this->view->message = "Код клиента: $identity->client <br>Дата: $date <br> Нет данных, свяжитесь с администрацией<br>";
+                $this->view->message = "Код продукции: $product_code <br>Дата: $date <br> Нет данных, свяжитесь с администрацией<br>";
                 return;
             }
 
@@ -51,7 +52,58 @@ class ReportController extends Zend_Controller_Action
             $this->view->out = $outputLines;
             $this->view->sumAll = $sumAll;
             $this->view->forWho = $forWho;
-            $this->view->n = 75;
+            $this->view->n = 70;
+            $this->view->date = $dateOut;
+        }
+
+    }
+
+
+    public function productreportAction()
+    {
+        if (!isset($this->identity)){
+            $this->view->message = "Авторизуйтесь на сайте, используя ваши логин и пароль";
+            return;
+        } else {
+            $this->view->loggedin = true;
+        }
+        $request = $this->getRequest();
+        if(!$request->isPost()) {
+            $form = new Form_ProductReportForm();
+            $this->view->form = $form;
+        } else {
+            $form = new Form_ProductReportForm();
+            if ($form->isValid($request->getPost())) {
+                $product_code = $form->getValue('product_code');
+                $date = $form->getValue('date');
+                $dateOut = $date;
+                $byProductCode = $form->getValue('submit2');
+            }
+            $identity = Zend_Auth::getInstance()->getIdentity();
+            $model = new Model_Preparedata();
+            $result = $model->fetchByProductCode($product_code);
+            $arr = $result->toArray();
+            $forWho = $arr[0]['for_who'];
+            unset($arr);
+            // сохраняем данные для экспорта
+            $session = new Zend_Session_Namespace('identity');
+            $session->identity = $identity;
+            $session->date = $date;
+            $session->product_code = $product_code;
+
+            // проверяем, не пустые ли данные
+            if (count($result->toArray()) == 0){
+                $this->view->message = "Код продукции: $product_code <br>Дата: $date <br> Нет данных, свяжитесь с администрацией<br>";
+                return;
+            }
+
+            $outputLines = $model->prepareForOutput($result);
+
+            $sumAll = array_shift($outputLines);
+            $this->view->out = $outputLines;
+            $this->view->sumAll = $sumAll;
+            $this->view->forWho = $forWho;
+            $this->view->n = 70;
             $this->view->date = $dateOut;
         }
 

@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ERROR | E_PARSE);
+
 define('APPLICATION_ENV','development');
 // Define path to application directory
 defined('APPLICATION_PATH')

@@ -27,6 +27,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                         'controller' => 'report',
                                         'action' => 'index'),
                                         array (
+                                            'label' => 'Отчет по коду продукции',
+                                            'controller' => 'report',
+                                            'action' => 'productreport'),
+
+                                        array (
                                         'label' => 'Выйти',
                                         'controller' => 'auth',
                                         'action' => 'logout')

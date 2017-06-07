@@ -2,15 +2,28 @@
 
 class Model_Preparedata
 {
-    public function fetchFromDb($identity, $date, $product_code){
+    public function fetchFromDb($date, $product_code, $byProductCode = false){
         $table = new Zend_Db_Table('data');
         $table->getAdapter()->query("SET character_set_results='utf8'");
         $table->getAdapter()->query("SET NAMES 'utf8'");
-        $select = $table->select()
-                            ->where('client = ?', $identity->client) // выбираем из базы данные для залогиненного клиента
-                            ->where('date = ?', $date)
-                            //->limit(200,0)
-                            ->where('product_code = ?', $product_code);
+        $select = $table->select()->where('product_code = ?', $product_code);
+
+        if(!$byProductCode)
+        {
+            $select->where('date = ?', $date);
+        }
+
+
+        $result = $table->fetchAll($select);
+        return $result;
+    }
+
+    public function fetchByProductCode($product_code)
+    {
+        $table = new Zend_Db_Table('data');
+        $table->getAdapter()->query("SET character_set_results='utf8'");
+        $table->getAdapter()->query("SET NAMES 'utf8'");
+        $select = $table->select()->where('product_code = ?', $product_code);
         $result = $table->fetchAll($select);
         return $result;
     }
@@ -29,6 +42,7 @@ class Model_Preparedata
         } // дальше
 
         // группируем по районам
+        $sumAll = 0;
         foreach ($data as $i => $item) {
                 $byArea[$data[$i]['area']][] = $data[$i];
                 $sumAll += $item['quantity'];

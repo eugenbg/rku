@@ -7,6 +7,7 @@ class Model_UpdateDb  {
     }
 
     public function update($path) {
+            $endQuery = '';
             $modelUpdateDb = new Zend_Db_Table('data');
             // очистим таблицу
             $modelUpdateDb->getAdapter()->query("SET character_set_results='utf8'");
@@ -17,6 +18,11 @@ class Model_UpdateDb  {
             $startQuery = 'INSERT INTO data (client, product_code, date, task_number, task_date, postman_name, street, house, korpus, for_who, street_house, fail, quantity, area) VALUES ';
             if (($handle = fopen($path, "r")) !== FALSE) {
                 while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+
+foreach($data as $key => $piece)
+{
+ $data[$key] = str_replace("'", "", $data[$key]);
+}
                     $endQuery .= "('$data[0]', '$data[1]', '$data[2]', '$data[3]', '$data[4]', '$data[5]', '$data[6]', '$data[7]', '$data[8]', '$data[9]', '$data[10]', '$data[11]', '$data[12]', '$data[13]'), ";
                     $row++;
                     $nQuery++;
@@ -29,6 +35,9 @@ class Model_UpdateDb  {
                         //$query = iconv('windows-1251', 'utf-8', $query);
                         //echo $query . "<br>";
                         // execute query
+//ob_get_clean();ob_get_clean();ob_get_clean();
+						//echo '<pre>'.$query.'</pre>';
+						//echo '<br><br>';
                         $modelUpdateDb->getAdapter()->query($query);
                         // start over
                         $endQuery = '';
