@@ -9,21 +9,25 @@ class Form_ProductReportForm extends Zend_Form
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Смотреть отчет');
 
-        $productCodes = $this->getProductCodes();
+        $productCode = new Zend_Form_Element_Text('product_code');
+        $productCode   ->setLabel('Код продукции')
+            ->setRequired(true);
 
-        $productCode = new Zend_Form_Element_Select('product_code', array(
-            "label" => "Код продукции",
-            "required" => true,
-        ));
+        /*        $productCodes = $this->getProductCodes();
 
-        foreach ($productCodes as $row) {
-            if($row['product_code'] == 0)
-                continue;
+                $productCode = new Zend_Form_Element_Select('product_code', array(
+                    "label" => "Код продукции",
+                    "required" => true,
+                ));
 
-            $productCode->addMultiOptions(
-                array($row['product_code'] => $row['product_code'])
-            );
-        }
+                foreach ($productCodes as $row) {
+                    if($row['product_code'] == 0)
+                        continue;
+
+                    $productCode->addMultiOptions(
+                        array($row['product_code'] => $row['product_code'])
+                    );
+                }*/
 
 
         $this->addElement($productCode);

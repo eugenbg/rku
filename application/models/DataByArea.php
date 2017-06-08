@@ -1,29 +1,13 @@
 <?php
 
-class Model_Preparedata
+class Model_DataByArea
 {
-    public function fetchFromDb($date, $product_code, $byProductCode = false){
+    public function fetchFromDb($date, $product_code){
         $table = new Zend_Db_Table('data');
         $table->getAdapter()->query("SET character_set_results='utf8'");
         $table->getAdapter()->query("SET NAMES 'utf8'");
         $select = $table->select()->where('product_code = ?', $product_code);
-
-        if(!$byProductCode)
-        {
-            $select->where('date = ?', $date);
-        }
-
-
-        $result = $table->fetchAll($select);
-        return $result;
-    }
-
-    public function fetchByProductCode($product_code)
-    {
-        $table = new Zend_Db_Table('data');
-        $table->getAdapter()->query("SET character_set_results='utf8'");
-        $table->getAdapter()->query("SET NAMES 'utf8'");
-        $select = $table->select()->where('product_code = ?', $product_code);
+        $select->where('date = ?', $date);
         $result = $table->fetchAll($select);
         return $result;
     }
@@ -54,6 +38,7 @@ class Model_Preparedata
             }
         }
         // группируем по улицам
+        $sumAreaDay = array();
         foreach ($byAreaDate as $areakey => $area) {
             foreach ($area as $datekey => $date) {
                  foreach ($date as $item){

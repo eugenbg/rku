@@ -4,11 +4,11 @@
     <div id="view-content">
     <div class="noprint">
         <?php if(isset($this->out)): ?>
-        <a href="report/export">Экспорт в excel</a> | <a href="#" onClick="window.print();return false">Распечатать отчет</a><br>
+        <a href="/report/exportbyday">Экспорт в excel</a> | <a href="#" onClick="window.print();return false">Распечатать отчет</a><br>
         <?php endif; ?>
     </div>
 
-    <h1>Отчет ООО "РКУ", за месяц <?=$this->date; ?>, <?=$this->forWho; ?></h1>
+    <h1>Отчет ООО "РКУ", <?=$this->forWho; ?></h1>
     Всего распространено: <?=$this->sumAll; ?> <br>
 
     <?php $pointer = 0;    $end = false;    ?>

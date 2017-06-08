@@ -12,7 +12,8 @@ class Form_ReportForm extends Zend_Form
             "required" => true,
         ));
 
-        foreach ($productCodes as $row) {
+        //вывести имеющиеся коды и даты, для удобства
+/*        foreach ($productCodes as $row) {
             if($row['product_code'] == 0)
                 continue;
 
@@ -22,23 +23,31 @@ class Form_ReportForm extends Zend_Form
         }
 
         $months = $this->getMonths();
-        $dateSelect = new Zend_Form_Element_Select('date', array(
+        $date = new Zend_Form_Element_Select('date', array(
             "label" => "Месяц + год, например: Сентябрь 2013",
             "required" => true,
         ));
 
         foreach ($months as $row) {
-            $dateSelect->addMultiOptions(
+            $date->addMultiOptions(
                 array($row['date'] => $row['date'])
             );
-        }
+        }*/
+
+        $productCode = new Zend_Form_Element_Text('product_code');
+        $productCode   ->setLabel('Код продукции')
+            ->setRequired(true);
+
+        $date = new Zend_Form_Element_Text('date');
+        $date   ->setLabel('Месяц + год, например: Сентябрь 2013')
+            ->setRequired(true);
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setLabel('Смотреть отчет');
 
 
         $this->addElement($productCode);
-        $this->addElement($dateSelect);
+        $this->addElement($date);
         $this->addElement($submit);
 
         $this->setMethod('post');
