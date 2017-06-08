@@ -6,7 +6,7 @@ class UpdateDbController extends Zend_Controller_Action
     private $uploadPath;
     public function init()
     {
-        /* Initialize action controller here */
+        $this->identity = Zend_Auth::getInstance()->getIdentity();
     }
 
     public function indexAction()
