@@ -13,6 +13,7 @@ class Form_ProductReportForm extends Zend_Form
         $productCode   ->setLabel('Код продукции')
             ->setRequired(true);
 
+        //вывести имеющиеся коды и даты, для удобства
         /*        $productCodes = $this->getProductCodes();
 
                 $productCode = new Zend_Form_Element_Select('product_code', array(

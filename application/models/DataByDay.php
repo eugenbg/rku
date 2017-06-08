@@ -35,7 +35,7 @@ class Model_DataByDay
             $sumAll += $item['quantity'];
         }
 
-        uksort($byDate, array($this, 'sortByDateFunction'));
+        uksort($byDate, array($this, 'sortByDateFunctionPHP52'));
 
         // группируем по районам
         $byDateArea = array();
@@ -174,10 +174,26 @@ class Model_DataByDay
         return $sumByDateArea;
     }
     
-    function sortByDateFunction( $a, $b ) {
+    public function sortByDateFunction( $a, $b ) {
         return
             DateTime::createFromFormat('j.n.Y', $a)->getTimestamp()
             - DateTime::createFromFormat('j.n.Y', $b)->getTimestamp();
+    }
+
+    public function sortByDateFunctionPHP52( $a, $b ) {
+
+        $aDate = explode('.', $a);
+        $bDate = explode('.', $b);
+        if($aDate[2] !== $bDate[2])
+        {
+            return $aDate[2] - $bDate[2];
+        }
+        if($aDate[1] !== $bDate[1])
+        {
+            return $aDate[1] - $bDate[1];
+        }
+        return $aDate[0] - $bDate[0];
+
     }
 
     public function forExport($result){
