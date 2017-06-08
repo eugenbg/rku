@@ -36,6 +36,7 @@ class Model_DataByDay
         }
 
         uksort($byDate, array($this, 'sortByDateFunctionPHP52'));
+        $byDate = array_reverse($byDate);
 
         // группируем по районам
         $byDateArea = array();
