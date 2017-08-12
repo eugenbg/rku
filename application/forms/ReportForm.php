@@ -77,7 +77,7 @@ class Form_ReportForm extends Zend_Form
         $table->getAdapter()->query("SET NAMES 'utf8'");
         $select = $table
             ->select()
-            ->from('data','product_code')
+            ->from('data',array('product_code', 'client'))
             ->order('product_code')
             ->distinct();
 

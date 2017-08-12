@@ -38,23 +38,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                         ));
 
                     } elseif ($identity->role == 'admin') {
-                        $menuContainer = new Zend_Navigation(array (
-                                        array (
-                                        'label' => 'Обновить базу данных',
-                                        'controller' => 'updatedb',
-                                        'action' => 'index'),
-                                        /*array (
-                                        'label' => 'Зарегистрировать нового клиента',
-                                        'controller' => 'user',
-                                        'action' => 'register'),
-                                        array (
-                                        'label' => 'Удалить клиента',
-                                        'controller' => 'user',
-                                        'action' => 'delete'),*/
-                                        array (
-                                        'label' => 'Выйти',
-                                        'controller' => 'auth',
-                                        'action' => 'logout'))
+                        $menuContainer = new Zend_Navigation(
+                                            array (
+                                                        array (
+                                                            'label' => 'Обновить базу данных',
+                                                            'controller' => 'updatedb',
+                                                            'action' => 'index'),
+                                                        array (
+                                                            'label' => 'Рассылка',
+                                                            'controller' => 'links',
+                                                            'action' => 'index'
+                                                        ),
+                                                        array (
+                                                            'label' => 'Выйти',
+                                                            'controller' => 'auth',
+                                                            'action' => 'logout'
+                                                        )
+                                                    )
                                 );// new Zend_Navigation params
                     }
                 } else // if not logged in

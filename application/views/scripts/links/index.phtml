@@ -1,0 +1,13 @@
+<?php
+foreach ($this->productCodes as $code) {
+    if(!$code->product_code)
+        continue;
+    $url = 'http://' .
+        $this->controller->getRequest()->getServer('HTTP_HOST') .
+        $this->url(array('controller' => 'report', 'action' => 'productreport', 'product_code' => $code->product_code));
+    ?>
+<?php echo $code->client; ?> : <a href="<?php echo $url; ?>">
+    <?php echo $url; ?>
+</a><br/>
+<?php
+}

@@ -13,20 +13,16 @@ class ReportController extends Zend_Controller_Action
     //отчет по месяцам
     public function indexAction()
     {
-        if (!isset($this->identity)){
-            $this->view->message = "Авторизуйтесь на сайте, используя ваши логин и пароль";
-            return;
-        } else {
-            $this->view->loggedin = true;
-        }
         $request = $this->getRequest();
-        if(!$request->isPost()) {
+        $productCodeFromUrl = $request->getParam('product_code');
+
+        if(!$request->isPost() && !$productCodeFromUrl) {
             $form = new Form_ReportForm();
             $this->view->form = $form;
         } else {
             $form = new Form_ReportForm();
             if ($form->isValid($request->getPost())) {
-                $product_code = $form->getValue('product_code');
+                $product_code = $form->getValue('product_code') ? $form->getValue('product_code') : $productCodeFromUrl;
                 $date = $form->getValue('date');
                 $dateOut = $date;
             }
@@ -63,14 +59,10 @@ class ReportController extends Zend_Controller_Action
     //отчет только по коду продукции, без фильтра по месяцу
     public function productreportAction()
     {
-        if (!isset($this->identity)){
-            $this->view->message = "Авторизуйтесь на сайте, используя ваши логин и пароль";
-            return;
-        } else {
-            $this->view->loggedin = true;
-        }
         $request = $this->getRequest();
-        if(!$request->isPost()) {
+        $productCodeFromUrl = $request->getParam('product_code');
+
+        if(!$request->isPost() && !$productCodeFromUrl) {
             $form = new Form_ProductReportForm();
             $this->view->form = $form;
         } else {
@@ -79,6 +71,9 @@ class ReportController extends Zend_Controller_Action
                 $product_code = $form->getValue('product_code');
                 $date = $form->getValue('date');
                 $dateOut = $date;
+            }
+            if($productCodeFromUrl){
+                $product_code = $productCodeFromUrl;
             }
             $identity = Zend_Auth::getInstance()->getIdentity();
             $model = new Model_DataByDay();
